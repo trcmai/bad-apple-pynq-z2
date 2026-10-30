@@ -1,0 +1,12 @@
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+.Xil/
+*.jou
+*.log
+*.str
+bad_apple_misc/*.raw
+bad_apple_misc/*.mp4
