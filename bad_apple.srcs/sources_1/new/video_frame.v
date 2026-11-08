@@ -24,7 +24,7 @@ module video_frame
     input wire[31:0] i_bram_data, 
 
     output wire[7:0] o_red,o_green,o_blue, 
-    output wire[31:0] o_bram_addr,
+    output wire[9:0] o_bram_addr,
     output reg o_active 
 );
 // Image scaled down to 160x140 (4 times)
@@ -53,16 +53,9 @@ byte_addr = word * 4 = word << 2
 */
 wire[9:0] word = addr >> 5; 
 wire[4:0] pos = addr[4:0];
-wire[31:0] byte_addr = word << 2; 
 wire pixel;
 
 reg[4:0] pos_d;
-
-// localparam IMG_FILE = "C:/Users/trucmai/fpga_lab_session/bad_apple/bad_apple.srcs/sources_1/imports/bad_apple/frame.mem";
-
-//frame_rom #(.D(IMG_D),.FRAME(IMG_FILE)) frame_rom_inst(
-//    .clk(i_clk),.addr(addr),.pixel(pixel)
-//);
 
 //Delay 
 always @(posedge i_clk)
@@ -78,13 +71,10 @@ always @(posedge i_clk)
                 pos_d <= pos;
             end
     end
-assign o_bram_addr = byte_addr;
+assign o_bram_addr = word;
 assign pixel = i_bram_data[pos_d];
 
 //Assign color
-//assign o_red = o_active ? 8'hFF : 8'd0;
-//assign o_blue = o_active ? 8'hFF : 8'd0;
-//assign o_green = o_active ? 8'hFF : 8'd0;
 assign o_red = o_active ? {8{pixel}} : 8'd0;
 assign o_blue = o_active ? {8{pixel}} : 8'd0;
 assign o_green = o_active ? {8{pixel}} : 8'd0;
