@@ -25,10 +25,10 @@ module axi_rd_slave_model
     input  wire        i_rready
 );
 
-reg [31:0] mem [0:4095];          // fake DDR: 16 KB
+reg [31:0] mem [0:8191];          // fake DDR: 32 KB
 integer i;
 initial
-    for(i = 0; i < 4096; i = i + 1)
+    for(i = 0; i < 8192; i = i + 1)
         mem[i] = 32'hA000_0000 + i;
 
 reg        busy, stall;

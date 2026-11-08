@@ -522,7 +522,7 @@
           },
           "o_bram_addr": {
             "direction": "O",
-            "left": "9",
+            "left": "12",
             "right": "0"
           },
           "o_active": {
@@ -2324,8 +2324,11 @@
           "Register_PortB_Output_of_Memory_Primitives": {
             "value": "false"
           },
+          "Use_REGCEA_Pin": {
+            "value": "false"
+          },
           "Write_Depth_A": {
-            "value": "1024"
+            "value": "8192"
           },
           "use_bram_block": {
             "value": "Stand_Alone"
@@ -2506,6 +2509,14 @@
         "xci_path": "ip\\still_frame_frame_fetcher_0_0\\still_frame_frame_fetcher_0_0.xci",
         "inst_hier_path": "frame_fetcher_0",
         "has_run_ip_tcl": "true",
+        "parameters": {
+          "BRAM_AW": {
+            "value": "13"
+          },
+          "N_BURSTS": {
+            "value": "338"
+          }
+        },
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "frame_fetcher",
@@ -2772,7 +2783,7 @@
           },
           "o_bram_addr": {
             "direction": "O",
-            "left": "9",
+            "left": "12",
             "right": "0"
           },
           "o_bram_din": {

@@ -24,13 +24,12 @@ module video_frame
     input wire[31:0] i_bram_data, 
 
     output wire[7:0] o_red,o_green,o_blue, 
-    output wire[9:0] o_bram_addr,
+    output wire[12:0] o_bram_addr,
     output reg o_active 
 );
-// Image scaled down to 160x140 (4 times)
-localparam SCALE = 2; 
-localparam IMG_W = W >> SCALE;
-localparam IMG_H = H >> SCALE;
+// Scale back down to original resolution 480 x 360
+localparam IMG_W = 480;
+localparam IMG_H = 360;
 localparam IMG_D = IMG_W * IMG_H;
 
 
@@ -38,20 +37,17 @@ wire active_d;
 assign active_d = (i_h_cnter < W) && (i_v_cnter < H); 
 
 //Loading data from .mem -> bram 
-wire[W_N-1:0] x  = i_h_cnter >> 2; 
-wire[H_N-1:0] y = i_v_cnter >> 2; 
-wire[14:0] addr = x + y*IMG_W; 
+wire[W_N-1:0] x  = (i_h_cnter * 3) >> 2; 
+wire[H_N-1:0] y = (i_v_cnter * 3) >> 2; 
+wire[17:0] addr = x + y*IMG_W; 
 
 /* 
 Pixel addr -> (Word, Bit) for AXI to BRAM pipeline 
 Each word is 4 bytes = 32 bits because of ARM stream 
 => Word = addr / 32 = addr >> 5 (divided into blocks)
 => Bit = addr % 32 = addr[4:0]
-
-Because each word take 4 bytes, the address for each word will be 
-byte_addr = word * 4 = word << 2 
 */
-wire[9:0] word = addr >> 5; 
+wire[12:0] word = addr >> 5; 
 wire[4:0] pos = addr[4:0];
 wire pixel;
 

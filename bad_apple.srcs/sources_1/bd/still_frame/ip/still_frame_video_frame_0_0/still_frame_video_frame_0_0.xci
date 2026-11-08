@@ -72,7 +72,7 @@
         "o_red": [ { "direction": "out", "size_left": "7", "size_right": "0" } ],
         "o_green": [ { "direction": "out", "size_left": "7", "size_right": "0" } ],
         "o_blue": [ { "direction": "out", "size_left": "7", "size_right": "0" } ],
-        "o_bram_addr": [ { "direction": "out", "size_left": "9", "size_right": "0" } ],
+        "o_bram_addr": [ { "direction": "out", "size_left": "12", "size_right": "0" } ],
         "o_active": [ { "direction": "out" } ]
       },
       "interfaces": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "checksum": "3e662798"
+  "checksum": "7d0b64dd"
 }

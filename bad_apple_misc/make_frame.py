@@ -1,15 +1,17 @@
-import subprocess
 import numpy as np
-import os
 
-raw = np.fromfile("gray_160x120.raw",dtype = np.uint8)
-W = 160
-H = 120
-frames = raw.reshape(-1,W*H)
-bits = (frames > 127).astype(np.uint8)
-packed = np.packbits(bits, axis=1, bitorder="little")
-print(packed.shape)
+W, H = 480, 360
+WORDS = W * H // 32          # 5400
+PADDED = 5408                # 338 bursts x 16 words
 
-words = packed.view("<u4")
-print(words.shape, words.dtype)  
-np.save("badapple_160x120.npy", words)
+raw = np.memmap("gray_480x360.raw", dtype=np.uint8, mode="r").reshape(-1, W * H)
+print("frames:", raw.shape[0])
+
+bits   = (raw > 127).astype(np.uint8)
+packed = np.packbits(bits, axis=1, bitorder="little")   # same bit order as before
+words  = packed.view("<u4")                              # (N, 5400)
+
+out = np.zeros((words.shape[0], PADDED), dtype=np.uint32)
+out[:, :WORDS] = words
+np.save("badapple_480x360.npy", out)
+print("saved", out.shape, out.nbytes / 1e6, "MB")

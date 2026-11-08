@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.58255",
-   "Default View_TopLeft":"374,386",
+   "Default View_ScaleFactor":"0.974174",
+   "Default View_TopLeft":"570,147",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0
 #  -string -flagsOSRD
@@ -14,7 +14,7 @@ preplace port port-id_TMDS_Clk_n -pg 1 -lvl 6 -x 1960 -y 250 -defaultsOSRD
 preplace portBus TMDS_Data_p -pg 1 -lvl 6 -x 1960 -y 280 -defaultsOSRD
 preplace portBus TMDS_Data_n -pg 1 -lvl 6 -x 1960 -y 310 -defaultsOSRD
 preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 200 -y 330 -defaultsOSRD
-preplace inst video_timings_0 -pg 1 -lvl 2 -x 560 -y 130 -defaultsOSRD
+preplace inst video_timings_0 -pg 1 -lvl 2 -x 570 -y 130 -defaultsOSRD
 preplace inst video_frame_0 -pg 1 -lvl 3 -x 1020 -y 120 -defaultsOSRD
 preplace inst rgb2dvi_0 -pg 1 -lvl 5 -x 1770 -y 270 -defaultsOSRD
 preplace inst xlconcat_0 -pg 1 -lvl 4 -x 1440 -y 100 -defaultsOSRD
@@ -25,30 +25,30 @@ preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -x 200 -y 1150 -defaultsOSRD
 preplace inst xlconstant_0 -pg 1 -lvl 3 -x 1020 -y 750 -defaultsOSRD
 preplace inst xlconstant_1 -pg 1 -lvl 3 -x 1020 -y 850 -defaultsOSRD
 preplace inst xlconstant_2 -pg 1 -lvl 3 -x 1020 -y 630 -defaultsOSRD
-preplace inst frame_fetcher_0 -pg 1 -lvl 2 -x 560 -y 940 -defaultsOSRD
+preplace inst frame_fetcher_0 -pg 1 -lvl 2 -x 570 -y 940 -defaultsOSRD
 preplace inst axi_gpio_0 -pg 1 -lvl 5 -x 1770 -y 1170 -defaultsOSRD
 preplace inst axi_gpio_1 -pg 1 -lvl 5 -x 1770 -y 1000 -defaultsOSRD
 preplace inst xlconcat_1 -pg 1 -lvl 4 -x 1440 -y 920 -defaultsOSRD
 preplace inst xlconstant_4 -pg 1 -lvl 3 -x 1020 -y 500 -defaultsOSRD
 preplace netloc axi_bram_ctrl_0_bram_doutb 1 2 2 790 690 1240J
-preplace netloc axi_gpio_0_gpio2_io_o 1 1 5 390 1250 NJ 1250 1290J 1260 NJ 1260 1930
-preplace netloc axi_gpio_0_gpio_io_o 1 1 5 400 1300 NJ 1300 NJ 1300 NJ 1300 1940
+preplace netloc axi_gpio_0_gpio2_io_o 1 1 5 400 1250 NJ 1250 1290J 1260 NJ 1260 1930
+preplace netloc axi_gpio_0_gpio_io_o 1 1 5 410 1300 NJ 1300 NJ 1300 NJ 1300 1940
 preplace netloc clk_in1_0_1 1 0 1 NJ 330
-preplace netloc clk_wiz_0_pixel_clk 1 1 4 370 30 760 310 1270 320 NJ
+preplace netloc clk_wiz_0_pixel_clk 1 1 4 380 30 760 310 1270 320 NJ
 preplace netloc clk_wiz_0_serial_clk 1 1 4 N 340 NJ 340 NJ 340 NJ
-preplace netloc frame_fetcher_0_o_bram_addr 1 2 2 730 430 1290J
-preplace netloc frame_fetcher_0_o_bram_din 1 2 2 750 440 1280J
-preplace netloc frame_fetcher_0_o_bram_wenb 1 2 2 740 560 NJ
+preplace netloc frame_fetcher_0_o_bram_addr 1 2 2 740 430 1290J
+preplace netloc frame_fetcher_0_o_bram_din 1 2 2 760 440 1280J
+preplace netloc frame_fetcher_0_o_bram_wenb 1 2 2 750 560 NJ
 preplace netloc frame_fetcher_0_o_done 1 2 2 NJ 910 N
 preplace netloc frame_fetcher_0_o_err 1 2 2 NJ 930 N
-preplace netloc i_rst_0_1 1 0 5 NJ 140 390 40 750 300 NJ 300 NJ
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 5 20 1250 370 1130 790 1240 1290 1000 1600
+preplace netloc i_rst_0_1 1 0 5 NJ 140 400 40 750 300 NJ 300 NJ
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 5 20 1250 380 1130 790 1240 1290 1000 1600
 preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 4 30 1290 NJ 1290 NJ 1290 1240
 preplace netloc rgb2dvi_0_TMDS_Clk_n 1 5 1 1940J 250n
 preplace netloc rgb2dvi_0_TMDS_Clk_p 1 5 1 1930J 220n
 preplace netloc rgb2dvi_0_TMDS_Data_n 1 5 1 NJ 310
 preplace netloc rgb2dvi_0_TMDS_Data_p 1 5 1 1930J 280n
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 4 380 1230 NJ 1230 1310 1230 1610
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 4 390 1230 NJ 1230 1310 1230 1610
 preplace netloc video_frame_0_o_active 1 3 2 1310 280 NJ
 preplace netloc video_frame_0_o_blue 1 3 1 1290 100n
 preplace netloc video_frame_0_o_bram_addr 1 3 1 1300 140n
@@ -66,11 +66,11 @@ preplace netloc xlconstant_2_dout 1 3 1 1240J 630n
 preplace netloc xlconstant_4_dout 1 3 1 1240J 500n
 preplace netloc axi_smc_M01_AXI 1 4 1 N 1150
 preplace netloc axi_smc_M02_AXI 1 4 1 1570 980n
-preplace netloc frame_fetcher_0_m_axi 1 2 1 720 890n
+preplace netloc frame_fetcher_0_m_axi 1 2 1 730 890n
 preplace netloc processing_system7_0_DDR 1 3 1 1230 1070n
 preplace netloc processing_system7_0_FIXED_IO 1 3 1 1250 1090n
 preplace netloc processing_system7_0_M_AXI_GP0 1 3 1 N 1130
-levelinfo -pg 1 0 200 560 1020 1440 1770 1960
+levelinfo -pg 1 0 200 570 1020 1440 1770 1960
 pagesize -pg 1 -db -bbox -sgen -90 0 2140 1450
 "
 }

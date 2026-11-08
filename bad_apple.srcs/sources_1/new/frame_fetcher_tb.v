@@ -2,7 +2,8 @@
 
 module frame_fetcher_tb;
 
-localparam N_BURSTS  = 38;
+localparam N_BURSTS  = 338;                // 480x360 frame (5,408 words)
+localparam BRAM_AW   = 13;
 localparam BURST_LEN = 16;
 localparam N_WORDS   = N_BURSTS * BURST_LEN;
 
@@ -16,11 +17,11 @@ wire [2:0]  arsize;
 wire [1:0]  arburst, rresp;
 wire        arvalid, arready, rvalid, rready, rlast;
 wire        bram_we;
-wire [9:0]  bram_addr;
+wire [BRAM_AW-1:0] bram_addr;
 wire [31:0] bram_din;
 
 // DUT 
-frame_fetcher #(.N_BURSTS(N_BURSTS), .BURST_LEN(BURST_LEN)) dut(
+frame_fetcher #(.N_BURSTS(N_BURSTS), .BURST_LEN(BURST_LEN), .BRAM_AW(BRAM_AW)) dut(
     .m_axi_aclk(clk), .m_axi_aresetn(rstn), .i_start(start), .i_base_addr(32'd0),
     .o_done(done), .o_err(err),
     .m_axi_araddr(araddr), .m_axi_arlen(arlen), .m_axi_arsize(arsize),
@@ -39,7 +40,7 @@ axi_rd_slave_model slave(
 );
 
 // fake BRAM
-reg [31:0] bram [0:1023];
+reg [31:0] bram [0:(1<<BRAM_AW)-1];
 always @(posedge clk)
     if(bram_we) bram[bram_addr] <= bram_din;
 
@@ -93,7 +94,7 @@ initial
 // ---------------- timeout: stops the sim if done never comes ----------------
 initial
     begin
-        #200000;
+        #5000000;
         $display("TIMEOUT: o_done never went HIGH");
         $finish;
     end

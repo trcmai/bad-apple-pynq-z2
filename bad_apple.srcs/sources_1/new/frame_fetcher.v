@@ -2,10 +2,11 @@
 
 module frame_fetcher
 #(
-    parameter N_BURSTS = 38, 
-    parameter BURST_LEN = 16, // max 16 (AXI3) 
+    parameter N_BURSTS = 338,   // 480x360: 5,408 words / 16 = 338 bursts
+    parameter BURST_LEN = 16, // max 16 (AXI3)
     parameter TRANS_SIZE = 3'b010,
-    parameter BURST_SIZE = BURST_LEN * (1 << TRANS_SIZE) //=64 
+    parameter BURST_SIZE = BURST_LEN * (1 << TRANS_SIZE), //=64
+    parameter BRAM_AW = 13      // BRAM address width: 8192 words
 )
 (
     input wire m_axi_aclk,m_axi_aresetn, //active low reset 
@@ -37,7 +38,7 @@ module frame_fetcher
 
     //BRAM 
     output reg o_bram_wenb, 
-    output reg[9:0] o_bram_addr,
+    output reg[BRAM_AW-1:0] o_bram_addr,
     output reg[31:0] o_bram_din
 );
 
@@ -67,7 +68,8 @@ assign m_axi_arburst = 2'b01;
 //Burst counter and handshake setup 
 wire ar_hs = (m_axi_arready && m_axi_arvalid); 
 wire r_hs = (m_axi_rready && m_axi_rvalid);
-reg[5:0] burst_cnter; 
+localparam CNT_W = (N_BURSTS > 1) ? $clog2(N_BURSTS) : 1;   // 338 -> 9 bits
+reg[CNT_W-1:0] burst_cnter;
 wire last_burst = (burst_cnter == N_BURSTS - 1); 
 wire burst_done = (r_hs && m_axi_rlast);
 
@@ -143,7 +145,7 @@ always @(*)
 //R channel 
 //
 
-reg [9:0] wr_ptr; 
+reg [BRAM_AW-1:0] wr_ptr;
 
 localparam R_IDLE    = 1'b0; 
 localparam R_RECEIVED = 1'b1;
@@ -189,7 +191,7 @@ always @(*)
     begin
         nxt_r_state = cur_r_state;
         case(cur_r_state)
-            R_IDLE: if(ar_hs) nxt_r_state = R_RECEIVED;   // TODO
+            R_IDLE: if(ar_hs) nxt_r_state = R_RECEIVED;
             R_RECEIVED: if(r_hs && m_axi_rlast) nxt_r_state = R_IDLE;
             default:   nxt_r_state = R_IDLE;
         endcase
